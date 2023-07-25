@@ -251,6 +251,17 @@ export function usePromiseTransaction(chainId: number | undefined, options?: Tra
               chainId,
             }))
           } else {
+            addNotification({
+              notification: {
+                type: 'transactionFailed',
+                submittedAt: Date.now(),
+                transaction,
+                receipt: e.receipt,
+                transactionName: options?.transactionName,
+              },
+              chainId,
+            })
+
             setState({
               status: 'Fail',
               transaction,
